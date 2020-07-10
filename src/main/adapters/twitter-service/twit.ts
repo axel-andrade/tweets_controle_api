@@ -16,6 +16,8 @@ export default class TwitAdapter implements ITwitterService {
 
         const tweetBody : ITweetBody = {
           text,
+          tweetId: tweet.id_str,
+          userName: user.name,
           userScreenName: `@${user.screen_name}`,
           userImage: user.profile_image_url_https,
           userDescription: user.description
