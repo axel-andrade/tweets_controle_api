@@ -10,8 +10,9 @@ export class GetTweetsByTextController implements IController {
 
     async handle (req: IRequest): Promise<IResponse> {
       try {
-        const { text, count } = req.query
-        const tweets = await this.getTweetsByTextUseCase.get(text, count)
+        const { hashtag, text, count } = req.query
+        const q = hashtag ? `#${hashtag}` : text
+        const tweets = await this.getTweetsByTextUseCase.get(q, count)
         return ok(tweets)
       } catch (error) {
         return badRequest(error)
