@@ -5,6 +5,7 @@ export interface IResponse {
 
 export interface IRequest {
     body?: any
+    query?: any
     headers?: any
     params?: any
 }

@@ -1,5 +1,5 @@
 import { IController, IRequest, IResponse, AddTweetUseCase } from './add-tweet-protocol'
-import { serverError, noContent } from '../../helpers/http'
+import { badRequest, ok } from '../../../helpers/http'
 
 export class AddTweetController implements IController {
   private readonly addTweetUseCase: AddTweetUseCase
@@ -10,10 +10,10 @@ export class AddTweetController implements IController {
 
   async handle (req: IRequest): Promise<IResponse> {
     try {
-      await this.addTweetUseCase.add(req.body)
-      return noContent()
+      const tweet = await this.addTweetUseCase.add(req.body)
+      return ok(tweet)
     } catch (error) {
-      return serverError(error)
+      return badRequest(error)
     }
   }
 }

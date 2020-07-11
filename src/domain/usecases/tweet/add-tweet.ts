@@ -1,7 +1,5 @@
-import { MissingParamError } from '../../../presentation/errors'
-import { ITweetModel } from '../../models/tweet'
+import { ITweetModel } from '../../protocols/add-tweet'
 
-export { ITweetModel } from '../../models/tweet'
 export type TweetParams = Omit<ITweetModel, 'id'>
 
 export class AddTweetUseCase {
@@ -11,7 +9,7 @@ export class AddTweetUseCase {
       this.repository = repository
     }
 
-    async add (data: TweetParams) : Promise<void> {
-      await this.repository.add(data)
+    async add (data: TweetParams) : Promise<any> {
+      return await this.repository.add(data)
     }
 }

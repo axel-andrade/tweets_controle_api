@@ -5,7 +5,8 @@ export const RouterAdapter = (controller: IController) => {
   return async (req: Request, res: Response) => {
     const request: IRequest = {
       body: req.body,
-      params: req.params
+      params: req.params,
+      query: req.query
     }
     const response = await controller.handle(request)
     if (response.statusCode >= 200 && response.statusCode <= 299) {

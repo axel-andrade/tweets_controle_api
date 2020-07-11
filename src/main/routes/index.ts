@@ -1,14 +1,12 @@
 import { Router } from 'express'
 import tweetRoutes from './tweet-routes'
-import TwitterServiceAdapter from '../adapters/twitter-service'
 
 const router = Router()
 
 router.use('/', tweetRoutes)
 
 router.get('/', async (req: any, res: any) => {
-  const tweets = await TwitterServiceAdapter.searchTweets('#test', 100)
-  res.send(JSON.stringify(tweets))
+  res.send('Hello world')
 })
 
 router.use('*', (req: any, res: any) => {

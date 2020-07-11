@@ -6,7 +6,7 @@ import helmet from 'helmet'
 import cors from 'cors'
 import routes from './routes'
 import databaseConnection from '../infra/db/mongo/helpers/mongoose'
-
+import { sleep } from '../utils/helpers'
 import TwitterServiceAdapter from '../main/adapters/twitter-service'
 
 // const initMongo = require('./config/mongo')
@@ -34,7 +34,8 @@ io.on('connection', async socket => {
   const track = hashtag ? `#${hashtag}` : text
   if (track) {
     const stream = await TwitterServiceAdapter.getStream(track, language)
-    stream.on('tweet', tweet => {
+    stream.on('tweet', async tweet => {
+      await sleep(10000)
       io.emit('tweet', tweet)
     })
   }

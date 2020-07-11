@@ -4,36 +4,12 @@ import twitConfig from '../../config/twit'
 const twit = new Twit(twitConfig)
 
 export default class TwitAdapter implements ITwitterService {
-  public async searchTweets (q: string, count: number): Promise<ITweetBody[]> {
+  public async searchTweets (q: string, count: number): Promise<any> {
     try {
       const { data } = await twit.get('search/tweets', { q, count })
       const tweets = data.statuses || []
-      const listOfTweets : ITweetBody[] = []
-
-      tweets.forEach(tweet => {
-        const { text = '', user = {}, entities = {} } = tweet
-        const { media = [], urls } = entities
-
-        const tweetBody : ITweetBody = {
-          text,
-          tweetId: tweet.id_str,
-          userName: user.name,
-          userScreenName: `@${user.screen_name}`,
-          userImage: user.profile_image_url_https,
-          userDescription: user.description
-        }
-
-        if (media[0] && media[0].media_url_https) {
-          tweetBody.image = media[0].media_url_https
-        }
-
-        if (urls && urls.url) {
-          tweetBody.url = urls.url
-        }
-
-        listOfTweets.push(tweetBody)
-      })
-
+      const listOfTweets = []
+      tweets.forEach(tweet => listOfTweets.push(tweet))
       return listOfTweets
     } catch (err) {
       console.log(`Error in searchTweets: ${err}`)
