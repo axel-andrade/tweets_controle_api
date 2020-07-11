@@ -6,11 +6,7 @@ import helmet from 'helmet'
 import cors from 'cors'
 import routes from './routes'
 import databaseConnection from '../infra/db/mongo/helpers/mongoose'
-import { sleep } from '../utils/helpers'
-import TwitterServiceAdapter from '../main/adapters/twitter-service'
-
-// const initMongo = require('./config/mongo')
-// const WSAdapter = require('./app/adapters/ws')(http)
+import SocketAdapter from './adapters/socket/socketIO'
 
 const port = env.port
 express.json()
@@ -28,20 +24,7 @@ app.use(routes)
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
 
-io.on('connection', async socket => {
-  console.log('Running socket: ', socket.id)
-  const { hashtag, text, language } = socket.handshake.query
-  const track = hashtag ? `#${hashtag}` : text
-  if (track) {
-    const stream = await TwitterServiceAdapter.getStream(track, language)
-    stream.on('tweet', async tweet => {
-      await sleep(10000)
-      io.emit('tweet', tweet)
-    })
-  }
-})
-
-// WSAdapter.connect()
+const connectIO = () => new SocketAdapter(io).connect()
 
 http.listen(app.get('port'), function () {
   console.log('listening on port:', port)
@@ -49,5 +32,4 @@ http.listen(app.get('port'), function () {
 
 // Init Database
 databaseConnection()
-
-export default app
+connectIO()

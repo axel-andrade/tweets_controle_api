@@ -1,5 +1,5 @@
 import AddTweetComposer from '../composers/tweet/add-tweet'
-import { RouterAdapter } from '../adapters/router-service/express'
+import { RouterAdapter } from '../adapters/router/express'
 import { Router } from 'express'
 import GetTweetsByTextComposer from '../composers/tweet/get-tweets-by-text'
 
