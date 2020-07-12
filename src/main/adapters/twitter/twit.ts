@@ -13,6 +13,7 @@ export default class TwitAdapter implements ITwitterService {
       return listOfTweets
     } catch (err) {
       console.log(`Error in searchTweets: ${err}`)
+      return []
     }
   }
 
