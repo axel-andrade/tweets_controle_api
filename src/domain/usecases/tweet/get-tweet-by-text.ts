@@ -1,6 +1,6 @@
-import { ITweetModel } from '../../protocols/add-tweet'
+import { IAddTweetModel } from '../../protocols/add-tweet'
 
-export type TweetParams = Omit<ITweetModel, 'id'>
+export type IAddTweetModel = Omit<IAddTweetModel, 'id'>
 
 export class GetTweetsByTextUseCase {
     private readonly service: ITwitterService;

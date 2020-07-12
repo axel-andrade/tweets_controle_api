@@ -4,7 +4,7 @@
 
     npm install 
 
-- Depois é necessário adicionar na pasta raiz os arquivos .env e .env.example que nao estão no repositório por quesões de segurança.
+- Depois é necessário adicionar na pasta raiz o arquivo .env que nao esté no repositório por questões de segurança.
 
 - Finalmente execute o comando: <br>
     npm start 

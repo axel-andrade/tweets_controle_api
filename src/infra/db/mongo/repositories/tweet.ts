@@ -1,9 +1,9 @@
-import { TweetParams } from '../../../../domain/usecases/tweet/add-tweet'
+import { IAddTweetModel } from '../../../../domain/usecases/tweet/add-tweet'
 import { IAddTweetRepository } from '../../../protocols/add-tweet-repository'
 import TweetSchema from '../schemas/tweet'
 
 export class TweetRepository implements IAddTweetRepository {
-  async add (data: TweetParams): Promise<any> {
+  async add (data: IAddTweetModel): Promise<any> {
     const { searchText, tweet } = data
     let document = await TweetSchema.findOne({ searchText })
     if (document) {

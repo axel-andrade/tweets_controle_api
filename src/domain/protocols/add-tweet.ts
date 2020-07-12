@@ -1,4 +1,4 @@
-export interface ITweetModel {
+export interface IAddTweetModel {
     tweet: Object
     searchText:string
 }

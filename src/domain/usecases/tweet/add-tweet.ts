@@ -1,6 +1,4 @@
-import { ITweetModel } from '../../protocols/add-tweet'
-
-export type TweetParams = Omit<ITweetModel, 'id'>
+import { IAddTweetModel } from '../../protocols/add-tweet'
 
 export class AddTweetUseCase {
     private readonly repository: any;
@@ -9,7 +7,7 @@ export class AddTweetUseCase {
       this.repository = repository
     }
 
-    async add (data: TweetParams) : Promise<any> {
+    async add (data: IAddTweetModel) : Promise<any> {
       return await this.repository.add(data)
     }
 }
